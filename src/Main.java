@@ -20,6 +20,15 @@ public class Main {
         System.out.println(max());
         System.out.println(average());
         printOnlyName();
+        indexSalary(5);
+        printInfo(1);
+        System.out.println(sum(2));
+        System.out.println(min(1));
+        System.out.println(max(3));
+        System.out.println(average(2));
+        indexSalaryOfDepartment(50, 4);
+        employeeSalaryLessThen(40000);
+        employeeSalaryMoreThen(60000);
 
     }
 
@@ -29,10 +38,28 @@ public class Main {
         }
     }
 
+    public static void printInfo(int department) {
+        for (Employee value : employee) {
+            if (department == value.getDepartment()) {
+                System.out.println("name: " + value.getName() + "salary:" + value.getSalary());
+            }
+        }
+    }
+
     public static double sum() {
         double sum = 0.00;
         for (Employee value : employee) {
             sum += value.getSalary();
+        }
+        return sum;
+    }
+
+    public static double sum(int department) {
+        double sum = 0.00;
+        for (Employee value : employee) {
+            if (department == value.getDepartment()) {
+                sum += value.getSalary();
+            }
         }
         return sum;
     }
@@ -47,6 +74,16 @@ public class Main {
         return minEmployee;
     }
 
+    public static Employee min(int department) {
+        Employee minEmployeeOfDepartment = null;
+        for (Employee employee : employee) {
+            if (department == employee.getDepartment() && (minEmployeeOfDepartment == null || employee.getSalary() < minEmployeeOfDepartment.getSalary())) {
+                minEmployeeOfDepartment = employee;
+            }
+        }
+        return minEmployeeOfDepartment;
+    }
+
     public static Employee max() {
         Employee maxEmployee = employee[0];
         for (Employee employee : employee) {
@@ -57,13 +94,67 @@ public class Main {
         return maxEmployee;
     }
 
+    public static Employee max(int department) {
+        Employee maxEmployeeOfDepartment = null;
+        for (Employee employee : employee) {
+            if (department == employee.getDepartment() && (maxEmployeeOfDepartment == null || employee.getSalary() > maxEmployeeOfDepartment.getSalary())) {
+                maxEmployeeOfDepartment = employee;
+            }
+        }
+        return maxEmployeeOfDepartment;
+    }
+
     public static double average() {
         return sum() / employee.length;
+    }
+
+    public static double average(int department) {
+        double sum = 0.00;
+        int count = 0;
+        for (Employee value : employee) {
+            if (department == value.getDepartment()) {
+                sum += value.getSalary();
+                count++;
+            }
+        }
+        return sum / count;
     }
 
     public static void printOnlyName() {
         for (Employee value : employee) {
             System.out.println(value.getName());
+        }
+    }
+
+    public static void indexSalary(double percent) {
+        for (Employee value : employee) {
+            double indexSalary = value.getSalary() * percent / 100 + value.getSalary();
+            System.out.println(indexSalary);
+        }
+    }
+
+    public static void indexSalaryOfDepartment(double percent, int department) {
+        for (Employee value : employee) {
+            if (department == value.getDepartment()) {
+                double indexSalary = value.getSalary() * percent / 100 + value.getSalary();
+                System.out.println(indexSalary);
+            }
+        }
+    }
+
+    public static void employeeSalaryLessThen(double salary) {
+        for (Employee value : employee) {
+            if (salary < value.getSalary()) {
+                System.out.println("id: " + value.getId() + " name: " + value.getName() + " salary: " + value.getSalary());
+            }
+        }
+    }
+
+    public static void employeeSalaryMoreThen(double salary) {
+        for (Employee value : employee) {
+            if (salary >= value.getSalary()) {
+                System.out.println("id: " + value.getId() + " name: " + value.getName() + " salary: " + value.getSalary());
+            }
         }
     }
 }
